@@ -203,3 +203,17 @@ php artisan test
 ```
 
 Ini membantu memastikan logika yang kamu tambahkan tetap berjalan dengan benar saat proyek berkembang.
+
+---
+
+## 👤 Pengembang
+
+- Ratna Kurnia Putri (2402310181)
+- Azka 'Awathif (2402310197)
+- I'anatur Rofiqah (2402310197)
+
+---
+
+## 📄 Lisensi
+
+MIT

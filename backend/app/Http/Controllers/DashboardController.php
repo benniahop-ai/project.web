@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -16,8 +18,20 @@ class DashboardController extends Controller
             $totalBooks = Book::count();
             $totalLoans = Loan::count();
             $activeLoans = Loan::where('status', 'BORROWED')->count();
+            $totalCategories = Category::count();
+            $totalUsers = User::where('role', 'user')->count();
+            $returnedLoans = Loan::where('status', 'RETURNED')->count();
+            $recentLoans = Loan::with(['user', 'book'])->latest()->limit(5)->get();
 
-            return view('admin.dashboard', compact('totalBooks', 'totalLoans', 'activeLoans'));
+            return view('admin.dashboard', compact(
+                'totalBooks',
+                'totalLoans',
+                'activeLoans',
+                'totalCategories',
+                'totalUsers',
+                'returnedLoans',
+                'recentLoans'
+            ));
         }
 
         $activeLoans = Loan::where('user_id', $user->id)
@@ -27,4 +41,3 @@ class DashboardController extends Controller
         return view('dashboard', compact('activeLoans'));
     }
 }
-
