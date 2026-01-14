@@ -1,0 +1,35 @@
+@extends('layouts.app')
+
+@section('content')
+    <h1 class="text-2xl font-semibold mb-4">Tambah Buku</h1>
+    <form action="{{ route('admin.books.store') }}" method="POST" class="space-y-4 max-w-lg">
+        @csrf
+        <div>
+            <label class="block mb-1">Judul</label>
+            <input type="text" name="title" value="{{ old('title') }}" class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+            <label class="block mb-1">Penulis</label>
+            <input type="text" name="author" value="{{ old('author') }}" class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+            <label class="block mb-1">Tahun</label>
+            <input type="number" name="year" value="{{ old('year') }}" class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+            <label class="block mb-1">Stock</label>
+            <input type="number" name="stock" value="{{ old('stock', 0) }}" class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+            <label class="block mb-1">Kategori</label>
+            <select name="category_id" class="w-full border rounded px-3 py-2">
+                <option value="">Pilih Kategori</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
+    </form>
+@endsection
+
